@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Board from "./component/board.js";
+import Header from "./component/header.js";
+import Search from "./component/Search.js";
+import Join from "./component/join.js";
+import Login from "./component/login.js";
+
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <hr></hr>
+      <Join></Join>
+      <hr></hr>
+      <Login></Login>
+      <hr></hr>
+      <Search></Search>
+      <hr></hr>
+      <Board></Board>
+
     </div>
   );
 }
