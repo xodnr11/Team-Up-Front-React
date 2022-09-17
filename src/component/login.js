@@ -1,38 +1,97 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { TextField, Button, Checkbox, FormControlLabel, Grid, Typography, Avatar, Box } from '@mui/material';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { LockOutlined } from '@mui/icons-material';
+import { Container } from '@mui/system';
 
 const Login = () => {
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+
     let login = {
         username: null,
         password: null
     }
     return (
-        <div>
-            login
-            <form onSubmit={e => {
-                e.preventDefault();
+        <Container component='main' maxWidth='xs'>
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
 
-                login.username = e.target._username.value;
-                login.password = e.target._password.value;
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlined />
+                </Avatar>
+                <Typography component='h1' variant="h5">
+                    로그인
+                </Typography>
+                <TextField
+                    label="ID"
+                    margin='normal'
+                    required
+                    fullWidth
+                    name='_username'
+                    autoFocus
+                    onChange={(e) => {
+                        setUsername(e.target.value);
+                        console.log(username);
+                    }} />
 
-                console.log(login);
+                <TextField
+                    label="PASSWORD"
+                    margin='normal'
+                    type="password"
+                    required
+                    fullWidth
+                    name='_password'
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                        console.log(password);
+                    }} />
 
-                axios.post('/login', login)
-                    .then((response) => {
-                        console.log(response.data);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-            }}>
-                <p style={{ margin: 0 }}>ID</p>
-                <input id="_username" name="_username"></input>
-                <p style={{ margin: 0 }}>PASSWORD</p>
-                <input id="_password" name="_password"></input><br></br>
-                <input type="submit" value="login"></input>
-            </form>
-        </div>
+                <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='로그인 정보 저장' />
+
+                <Button
+                    type='submit'
+                    fullWidth
+                    variant='contained'
+                    sx={{ mt: 3 , mb: 3}}
+                    onClick={() => {
+                        console.log('login 작동');
+
+                        login.username = username;
+                        login.password = password;
+
+                        console.log(login)
+
+                        axios.post('/login', login)
+                            .then((response) => {
+                                console.log(response.data);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            })
+                    }}
+                >로그인</Button>
+                <Grid container >
+                    <Grid item xs>
+                        <Link>비밀번호 찾기</Link>
+
+                    </Grid>
+                    <Grid item>
+                        <Link to='/join'>회원가입 하기</Link>
+
+                    </Grid>
+                </Grid>
+
+            </Box>
+
+        </Container>
     );
 }
 export default Login;

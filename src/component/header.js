@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
@@ -9,23 +10,21 @@ const Header = () => {
   var content = null;
 
   if(mode==='login'){
-    content = <a href='/' onClick={(e) => {
-      e.preventDefault();
+    content = <Link to='/' onClick={(e) => {
       setMode('logout');
-    }}> user</a>
+    }}> user</Link>
   }else if(mode==='logout'){
-    content= <a href='/' onClick={(e) => {
-      e.preventDefault();
+    content= <Link to='/loginpage' onClick={(e) => {
       setMode('login');
-    }}> login</a>
+    }}> login</Link>
   }
     return (
         <div id='container'>
-          <a href='/' onClick={(e) => {
-            e.preventDefault();
-            
-          }}>logo</a>
+          <Link to='/'>
+            logo
+          </Link>
           {content}
+          
         </div>
     );
 }
